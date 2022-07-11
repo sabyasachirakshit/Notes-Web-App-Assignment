@@ -22,7 +22,7 @@ function showNotes() {
                             <h5 class="card-title">${notes_title[i]}</h5>
                             <p class="card-text">${notes_desc[i]}</p>
           <button class="btn btn-primary mx-3">Edit Note</button>
-          <button class="btn btn-danger">Delete Note</button>
+          <button class="btn btn-danger" onClick=deleteNote(${i})>Delete Note</button>
         </div>
       </div>`;
     }
@@ -39,6 +39,24 @@ document.getElementById("addBtn").addEventListener("click", () => {
     addNote(title, desc);
   }
 });
+
+function deleteNote(index) {
+  let notes_title = [];
+  let notes_desc = [];
+  let notesTitle = localStorage.getItem("notesTitle");
+  let notesDescription = localStorage.getItem("notesDescription");
+  if (notesTitle) {
+    notes_title = JSON.parse(notesTitle);
+  }
+  if (notesDescription) {
+    notes_desc = JSON.parse(notesDescription);
+  }
+  notes_title.splice(index, 1);
+  notes_desc.splice(index, 1);
+  localStorage.setItem("notesTitle", JSON.stringify(notes_title));
+  localStorage.setItem("notesDescription", JSON.stringify(notes_desc));
+  showNotes();
+}
 
 function addNote(title, desc) {
   let notes_title = [];
