@@ -11,7 +11,7 @@ function showNotes() {
   if (notesDescription) {
     notes_desc = JSON.parse(notesDescription);
   }
-  if (!notesTitle && !notesDescription) {
+  if (notes_title.length == 0 && notes_desc.length == 0) {
     document.getElementById("notes-content").innerHTML =
       "<p>Nothing to show.. Please try adding some notes first...</p>";
   } else {
@@ -21,7 +21,7 @@ function showNotes() {
                         <div class="card-body">
                             <h5 class="card-title">${notes_title[i]}</h5>
                             <p class="card-text">${notes_desc[i]}</p>
-          <button class="btn btn-primary mx-3">Edit Note</button>
+          <button class="btn btn-primary mx-3" onClick=editNote(${i})>Edit Note</button>
           <button class="btn btn-danger" onClick=deleteNote(${i})>Delete Note</button>
         </div>
       </div>`;
@@ -39,6 +39,62 @@ document.getElementById("addBtn").addEventListener("click", () => {
     addNote(title, desc);
   }
 });
+
+function editNote(index) {
+  document.getElementById("submissionArea").innerHTML = `
+                <h1>Take Notes</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Edit Title of Note#${
+                          index + 1
+                        }</label>
+                            <input type="text" class="form-control" id="titleArea" placeholder="Enter Title of your note" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Enter Description of Note#${
+                          index + 1
+                        }</label>
+                            <textarea class="form-control" id="descriptionArea" rows="3" placeholder="Enter Description of your note"></textarea>
+                    </div>
+                </form>
+                <button id="addBtn" class="btn btn-warning" onClick=modifyNote(${index})>Modify Note</button>
+                `;
+}
+function resetContent() {
+  document.getElementById("submissionArea").innerHTML = `<h1>Take Notes</h1>
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Enter Title</label>
+        <input type="text" class="form-control" id="titleArea" placeholder="Enter Title of your note" />
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Enter Description</label>
+        <textarea class="form-control" id="descriptionArea" rows="3"
+          placeholder="Enter Description of your note"></textarea>
+      </div>
+    </form>
+    <button id="addBtn" class="btn btn-primary">Add Note</button>
+    `;
+  showNotes();
+}
+
+function modifyNote(index) {
+  let notes_title = [];
+  let notes_desc = [];
+  let notesTitle = localStorage.getItem("notesTitle");
+  let notesDescription = localStorage.getItem("notesDescription");
+  if (notesTitle) {
+    notes_title = JSON.parse(notesTitle);
+  }
+  if (notesDescription) {
+    notes_desc = JSON.parse(notesDescription);
+  }
+  notes_title[index] = document.getElementById("titleArea").value;
+  notes_desc[index] = document.getElementById("descriptionArea").value;
+  localStorage.setItem("notesTitle", JSON.stringify(notes_title));
+  localStorage.setItem("notesDescription", JSON.stringify(notes_desc));
+  resetContent();
+}
 
 function deleteNote(index) {
   let notes_title = [];
