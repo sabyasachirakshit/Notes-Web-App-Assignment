@@ -83,8 +83,7 @@ document.getElementById("searchBar").addEventListener("input", () => {
     }
   });
 });
-
-document.getElementById("addBtn").addEventListener("click", () => {
+function addingProcess() {
   let title = document.getElementById("titleArea").value;
   let desc = document.getElementById("descriptionArea").value;
   if (title === "") {
@@ -92,8 +91,9 @@ document.getElementById("addBtn").addEventListener("click", () => {
   } else {
     addNote(title, desc);
   }
-});
+}
 
+document.getElementById("addBtn").addEventListener("click", addingProcess);
 function editNote(index) {
   document.getElementById("submissionArea").innerHTML = `
                 <h1>Take Notes</h1>
@@ -127,7 +127,7 @@ function resetContent() {
           placeholder="Enter Description of your note"></textarea>
       </div>
     </form>
-    <button id="addBtn" class="btn btn-primary">Add Note</button>
+    <button id="addBtn" class="btn btn-primary" onClick='addingProcess()'>Add Note</button>
     `;
   showNotes();
 }
