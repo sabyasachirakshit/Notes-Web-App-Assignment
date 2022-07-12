@@ -57,7 +57,7 @@ document.getElementById("searchBar").addEventListener("input", () => {
     notes_date = JSON.parse(notesDate);
   }
   let htmlContent = ``;
-  let flag = true;
+  let flag = false;
   notes_title.forEach((element, index) => {
     if (
       element.toUpperCase().includes(searchVal.toUpperCase()) ||
@@ -73,8 +73,6 @@ document.getElementById("searchBar").addEventListener("input", () => {
         </div>
       </div>`;
       flag = true;
-    } else {
-      flag = false;
     }
     if (flag == false) {
       document.getElementById(
