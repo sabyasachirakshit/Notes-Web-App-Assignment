@@ -22,7 +22,7 @@ function showNotes() {
   } else {
     htmlContent = "";
     for (let i = 0; i < notes_title.length; i++) {
-      htmlContent += `<div class="card mx-3" style="width: 18rem;">
+      htmlContent += `<div class="card mx-3 my-3" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">${notes_title[i]}</h5>
                             <p class="card-text">${notes_desc[i]}</p>
@@ -35,6 +35,56 @@ function showNotes() {
     document.getElementById("notes-content").innerHTML = htmlContent;
   }
 }
+
+document.getElementById("searchBar").addEventListener("input", () => {
+  let searchVal = document.getElementById("searchBar").value;
+  let notes_title = [];
+  let notes_desc = [];
+  let notes_date = [];
+  let notesDate = localStorage.getItem("notesDate");
+  let notesTitle = localStorage.getItem("notesTitle");
+  let notesDescription = localStorage.getItem("notesDescription");
+  if (searchVal == "") {
+    showNotes();
+  }
+  if (notesTitle) {
+    notes_title = JSON.parse(notesTitle);
+  }
+  if (notesDescription) {
+    notes_desc = JSON.parse(notesDescription);
+  }
+  if (notesDate) {
+    notes_date = JSON.parse(notesDate);
+  }
+  let htmlContent = ``;
+  let flag = true;
+  notes_title.forEach((element, index) => {
+    if (
+      element.toUpperCase().includes(searchVal.toUpperCase()) ||
+      notes_desc[index].toUpperCase().includes(searchVal.toUpperCase())
+    ) {
+      htmlContent += `<div class="card mx-3 my-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${element}</h5>
+                            <p class="card-text">${notes_desc[index]}</p>
+          <button class="btn btn-primary mx-3" onClick=editNote(${index})>Edit Note</button>
+          <button class="btn btn-danger" onClick=deleteNote(${index})>Delete Note</button>
+          <p>Added on ${notes_date[index]}</p>
+        </div>
+      </div>`;
+      flag = true;
+    } else {
+      flag = false;
+    }
+    if (flag == false) {
+      document.getElementById(
+        "notes-content"
+      ).innerHTML = `<p>Notes not found related to search keyword "${searchVal}"</p>`;
+    } else {
+      document.getElementById("notes-content").innerHTML = htmlContent;
+    }
+  });
+});
 
 document.getElementById("addBtn").addEventListener("click", () => {
   let title = document.getElementById("titleArea").value;
