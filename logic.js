@@ -24,12 +24,12 @@ function showNotes() {
       htmlContent += `<div class="card mx-3 my-3" style="width: 18rem;">
                         <div class="card-body scroll">
                             <h5 class="card-title">${notes_title[i]}</h5>
-                            <p class="card-text">${notes_desc[i]}</p>
-          <button class="btn btn-primary mx-3" onClick=editNote(${i})>Edit Note</button>
-          <button class="btn btn-danger" onClick=deleteNote(${i})>Delete Note</button>
-          <p>Added on ${notes_date[i]}</p>
-        </div>
-      </div>`;
+                            <p class="card-text">${notes_desc[i]}</p>             
+                              <button class="btn btn-primary mx-2" onClick=editNote(${i})>Edit Note</button>
+                              <button class="btn btn-danger" onClick=deleteNote(${i})>Delete Note</button>                     
+                            <p>Added on ${notes_date[i]}</p>
+                        </div>
+                      </div>`;
     }
     document.getElementById("notes-content").innerHTML = htmlContent;
   }
@@ -66,8 +66,10 @@ document.getElementById("searchBar").addEventListener("input", () => {
                         <div class="card-body scroll">
                             <h5 class="card-title">${element}</h5>
                             <p class="card-text">${notes_desc[index]}</p>
+                            <div class="buttonContainer">
           <button class="btn btn-primary mx-3" onClick=editNote(${index})>Edit Note</button>
           <button class="btn btn-danger" onClick=deleteNote(${index})>Delete Note</button>
+          </div>
           <p>Added on ${notes_date[index]}</p>
         </div>
       </div>`;
