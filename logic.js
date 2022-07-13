@@ -66,13 +66,11 @@ document.getElementById("searchBar").addEventListener("input", () => {
                         <div class="card-body scroll">
                             <h5 class="card-title">${element}</h5>
                             <p class="card-text">${notes_desc[index]}</p>
-                            <div class="buttonContainer">
-          <button class="btn btn-primary mx-3" onClick=editNote(${index})>Edit Note</button>
-          <button class="btn btn-danger" onClick=deleteNote(${index})>Delete Note</button>
-          </div>
-          <p>Added on ${notes_date[index]}</p>
-        </div>
-      </div>`;
+                              <button class="btn btn-primary mx-2" onClick=editNote(${index})>Edit Note</button>
+                              <button class="btn btn-danger" onClick=deleteNote(${index})>Delete Note</button>
+                            <p>Added on ${notes_date[index]}</p>
+                        </div>
+                      </div>`;
       flag = true;
     }
     if (flag == false) {

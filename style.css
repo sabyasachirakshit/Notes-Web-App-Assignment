@@ -2,8 +2,3 @@
     max-height: 200px;
     overflow-y: auto;
 }
-
-.buttonContainer{
-    display: grid;
-    align-items: center;
-}
