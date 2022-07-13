@@ -22,7 +22,7 @@ function showNotes() {
     htmlContent = "";
     for (let i = 0; i < notes_title.length; i++) {
       htmlContent += `<div class="card mx-3 my-3" style="width: 18rem;">
-                        <div class="card-body">
+                        <div class="card-body scroll">
                             <h5 class="card-title">${notes_title[i]}</h5>
                             <p class="card-text">${notes_desc[i]}</p>
           <button class="btn btn-primary mx-3" onClick=editNote(${i})>Edit Note</button>
@@ -63,7 +63,7 @@ document.getElementById("searchBar").addEventListener("input", () => {
       notes_desc[index].toUpperCase().includes(searchVal.toUpperCase())
     ) {
       htmlContent += `<div class="card mx-3 my-3" style="width: 18rem;">
-                        <div class="card-body">
+                        <div class="card-body scroll">
                             <h5 class="card-title">${element}</h5>
                             <p class="card-text">${notes_desc[index]}</p>
           <button class="btn btn-primary mx-3" onClick=editNote(${index})>Edit Note</button>
