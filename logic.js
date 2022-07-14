@@ -17,12 +17,12 @@ function showNotes() {
   }
   if (notes_title.length == 0 && notes_desc.length == 0) {
     document.getElementById("notes-content").innerHTML =
-      "<p>Nothing to show.. Please try adding some notes first...</p>";
+      "<p id='no-notes'>Nothing to show.. Please try adding some notes first...</p>";
   } else {
     htmlContent = "";
     for (let i = 0; i < notes_title.length; i++) {
-      htmlContent += `<div class="card mx-3 my-3" style="width: 18rem;">
-                        <div class="card-body scroll">
+      htmlContent += `<div class="card mx-3 my-3" id='cardBody' style="width: 18rem;">
+                        <div class="card-body scroll" id='cardBody'>
                             <h5 class="card-title">${notes_title[i]}</h5>
                             <p class="card-text">${notes_desc[i]}</p>             
                               <button class="btn btn-primary mx-2" onClick=editNote(${i})>Edit Note</button>
@@ -59,8 +59,8 @@ document.getElementById("searchBar").addEventListener("input", () => {
   let flag = false;
   notes_title.forEach((element, index) => {
     if (element.toUpperCase().includes(searchVal.toUpperCase())) {
-      htmlContent += `<div class="card mx-3 my-3" style="width: 18rem;">
-                        <div class="card-body scroll">
+      htmlContent += `<div class="card mx-3 my-3" id='cardBody' style="width: 18rem;">
+                        <div class="card-body scroll" id='cardBody'>
                             <h5 class="card-title">${element}</h5>
                             <p class="card-text">${notes_desc[index]}</p>
                               <button class="btn btn-primary mx-2" onClick=editNote(${index})>Edit Note</button>
@@ -256,5 +256,26 @@ function addNote(title, desc) {
   showNotes();
 }
 showNotes(); //Calling showNotes to display any notes available as soon as user enters website
-
+const checkbox = document.getElementById("flexSwitchCheckDefault");
+checkbox.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    document.body.style.backgroundColor = "rgba(49, 35, 35, 0.87)";
+    document.getElementById("notes-Title").style.color = "white";
+    document.getElementById("title-title").style.color = "white";
+    document.getElementById("description-description").style.color = "white";
+    document.getElementById("your-notes").style.color = "white";
+    document.getElementById("no-notes").style.color = "white";
+    document.getElementById("cardBody").style.backgroundColor = "grey";
+    document.getElementById("cardBody").style.color = "white";
+  } else {
+    document.body.style.backgroundColor = "white";
+    document.getElementById("notes-Title").style.color = "black";
+    document.getElementById("title-title").style.color = "black";
+    document.getElementById("description-description").style.color = "black";
+    document.getElementById("your-notes").style.color = "black";
+    document.getElementById("no-notes").style.color = "black";
+    document.getElementById("cardBody").style.backgroundColor = "white";
+    document.getElementById("cardBody").style.color = "black";
+  }
+});
 //End of the program.
