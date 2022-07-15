@@ -1,5 +1,6 @@
 //Function to display notes under div 'notes-content' DOM
 function showNotes() {
+  let checkBox = document.getElementById("flexSwitchCheckDefault");
   let notes_title = [];
   let notes_desc = [];
   let notes_date = [];
@@ -16,8 +17,16 @@ function showNotes() {
     notes_date = JSON.parse(notesDate);
   }
   if (notes_title.length == 0 && notes_desc.length == 0) {
-    document.getElementById("notes-content").innerHTML =
-      "<p id='no-notes'>Nothing to show.. Please try adding some notes first...</p>";
+    if (checkBox.checked == true) {
+      document.getElementById(
+        "notes-content"
+      ).innerHTML = `<p id='no-notes' style='color:white'>Nothing to show..please add some notes</p>`;
+    } else {
+      document.getElementById(
+        "notes-content"
+      ).innerHTML = `<p id='no-notes'>Nothing to show..please add some notes</p>`;
+    }
+    
   } else {
     htmlContent = "";
     for (let i = 0; i < notes_title.length; i++) {
@@ -265,8 +274,6 @@ checkbox.addEventListener("change", (event) => {
     document.getElementById("description-description").style.color = "white";
     document.getElementById("your-notes").style.color = "white";
     document.getElementById("no-notes").style.color = "white";
-    document.getElementById("cardBody").style.backgroundColor = "grey";
-    document.getElementById("cardBody").style.color = "white";
   } else {
     document.body.style.backgroundColor = "white";
     document.getElementById("notes-Title").style.color = "black";
@@ -274,8 +281,6 @@ checkbox.addEventListener("change", (event) => {
     document.getElementById("description-description").style.color = "black";
     document.getElementById("your-notes").style.color = "black";
     document.getElementById("no-notes").style.color = "black";
-    document.getElementById("cardBody").style.backgroundColor = "white";
-    document.getElementById("cardBody").style.color = "black";
   }
 });
 //End of the program.
