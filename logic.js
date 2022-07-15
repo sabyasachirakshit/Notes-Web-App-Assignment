@@ -26,7 +26,6 @@ function showNotes() {
         "notes-content"
       ).innerHTML = `<p id='no-notes'>Nothing to show..please add some notes</p>`;
     }
-    
   } else {
     htmlContent = "";
     for (let i = 0; i < notes_title.length; i++) {
@@ -45,6 +44,7 @@ function showNotes() {
 }
 //Function to search notes by title or description [CASE INSENSITIVE MODE IS ON]
 document.getElementById("searchBar").addEventListener("input", () => {
+  let checkBox = document.getElementById("flexSwitchCheckDefault");
   let searchVal = document.getElementById("searchBar").value;
   let notes_title = [];
   let notes_desc = [];
@@ -80,9 +80,33 @@ document.getElementById("searchBar").addEventListener("input", () => {
       flag = true;
     }
     if (flag == false) {
-      document.getElementById(
-        "notes-content"
-      ).innerHTML = `<p>Notes not found related to search keyword "${searchVal}"</p>`;
+      if (checkBox.checked == true) {
+        document.getElementById(
+          "notes-content"
+        ).innerHTML = `<p id='notesNotFound' style='color:white'>Notes not found related to search keyword "${searchVal}"</p>`;
+        if (checkBox.checked == true) {
+          document.getElementById(
+            "notes-content"
+          ).innerHTML = `<p id='notesNotFound' style='color:white'>Notes not found related to search keyword "${searchVal}"</p>`;
+        } else {
+          document.getElementById(
+            "notes-content"
+          ).innerHTML = `<p id='notesNotFound'>Notes not found related to search keyword "${searchVal}"</p>`;
+        }
+      } else {
+        document.getElementById(
+          "notes-content"
+        ).innerHTML = `<p id='notesNotFound'>Notes not found related to search keyword "${searchVal}"</p>`;
+        if (checkBox.checked == true) {
+          document.getElementById(
+            "notes-content"
+          ).innerHTML = `<p id='notesNotFound' style='color:white'>Notes not found related to search keyword "${searchVal}"</p>`;
+        } else {
+          document.getElementById(
+            "notes-content"
+          ).innerHTML = `<p id='notesNotFound'>Notes not found related to search keyword "${searchVal}"</p>`;
+        }
+      }
     } else {
       document.getElementById("notes-content").innerHTML = htmlContent;
     }
@@ -274,6 +298,7 @@ checkbox.addEventListener("change", (event) => {
     document.getElementById("description-description").style.color = "white";
     document.getElementById("your-notes").style.color = "white";
     document.getElementById("no-notes").style.color = "white";
+    document.getElementById("notesNotFound").style.color = "white";
   } else {
     document.body.style.backgroundColor = "white";
     document.getElementById("notes-Title").style.color = "black";
@@ -281,6 +306,7 @@ checkbox.addEventListener("change", (event) => {
     document.getElementById("description-description").style.color = "black";
     document.getElementById("your-notes").style.color = "black";
     document.getElementById("no-notes").style.color = "black";
+    document.getElementById("notesNotFound").style.color = "black";
   }
 });
 //End of the program.
